@@ -20,13 +20,13 @@ Helpers.prototype.src = function src(dir, exts) {
       if (this.exts.indexOf(ext) === -1) {
         this.exts.push(ext);
       }
-      sources.concat(this.filter(dir, ext));
-    });
+      sources = sources.concat(this.filter(dir, ext));
+    }.bind(this));
   } else {
     if (this.exts.indexOf(exts) === -1) {
       this.exts.push(exts);
     }
-    sources.concat(this.filter(dir, exts));
+    sources = sources.concat(this.filter(dir, exts));
   }
   return sources;
 };

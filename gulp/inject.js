@@ -26,10 +26,15 @@ gulp.task('inject:tmp', function() {
   });
 
   return gulp.src(path.join(config.paths.tmp, '**/*.html'))
-    .pipe(inject(js))
-    .pipe(inject(css))
+    .pipe(inject(js, {
+      relative: true,
+    }))
+    .pipe(inject(css, {
+      relative: true,
+    }))
     .pipe(inject(vendor, {
       name: 'bower',
+      relative: true,
     }))
     .pipe(gulp.dest(config.paths.tmp));
 });
@@ -57,10 +62,15 @@ gulp.task('inject:build', function() {
   });
 
   return gulp.src(path.join(config.paths.dist, '**/*.html'))
-    .pipe(inject(js))
-    .pipe(inject(css))
+    .pipe(inject(js, {
+      relative: true,
+    }))
+    .pipe(inject(css, {
+      relative: true,
+    }))
     .pipe(inject(vendor, {
       name: 'bower',
+      relative: true,
     }))
     .pipe(gulp.dest(config.paths.dist));
 });

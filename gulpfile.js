@@ -25,6 +25,7 @@ gulp.task('watch', gulp.parallel(
 
 gulp.task('serve', gulp.series(
   'compile',
+  'browser-sync:tmp',
   'watch'
 ));
 
