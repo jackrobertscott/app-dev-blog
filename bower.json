@@ -1,0 +1,14 @@
+{
+  "name": "app-dev-blog",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "4.0",
+    "jquery": "~2.1.4"
+  }
+}
