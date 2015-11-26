@@ -1,6 +1,10 @@
 'use strict';
 
 var path = require('path');
+var _ = require('lodash');
+var jade = require('jade');
+var nunjucks = require('nunjucks');
+var config = require('../config');
 
 function Helpers() {
   this.exts = [];
@@ -38,9 +42,43 @@ Helpers.prototype.others = function others(dir) {
   ];
 };
 
-Helpers.prototype.uncached = function uncached(_module) {
+
+Helpers.prototype.locals = function locals(file) {
+  return _.assign(this._fileData(file), {
+    partial: this._partial,
+  });
+};
+
+Helpers.prototype._fileData = function _fileData(file) {
+  var data;
+  try {
+    data = this._uncached(
+      path.join(path.dirname(file.path),
+      path.basename(file.path, path.extname(file.path)) + '.json')
+    );
+  } catch (e) {
+    data = {};
+  }
+  return data;
+};
+
+Helpers.prototype._uncached = function _uncached(_module) {
   delete require.cache[require.resolve(_module)];
   return require(_module);
+};
+
+Helpers.prototype._partial = function _partial(file, data) {
+  var ext = path.extname(file);
+  file = path.join(__dirname, '..', config.paths.src, file);
+  data = _.assign(this._fileData(file), data || {});
+  switch (ext) {
+    case '.jade':
+      return jade.renderFile(file, data);
+    case '.nunjucks':
+      return nunjucks.render(file, data);
+    default:
+      throw new Error('partial with extension ' + ext + ' is not supported');
+  }
 };
 
 module.exports = new Helpers();

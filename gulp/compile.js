@@ -4,6 +4,9 @@ var path = require('path');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var sourcemaps = require('gulp-sourcemaps');
+var data = require('gulp-data');
+var jade = require('gulp-jade');
+var nunjucks = require('gulp-nunjucks-render');
 var babel = require('gulp-babel');
 var autoprefixer = require('gulp-autoprefixer');
 var less = require('gulp-less');
@@ -15,6 +18,26 @@ var helpers = require('./helpers');
 
 gulp.task('html', function() {
   return gulp.src(helpers.src(config.paths.src, '.html'))
+    .pipe(gulp.dest(config.paths.tmp));
+});
+
+gulp.task('jade', function() {
+  return gulp.src(helpers.src(config.paths.src, '.jade'))
+    .pipe(data(function(file) {
+      return helpers.locals(file);
+    }))
+    .pipe(jade({
+      pretty: true,
+    }))
+    .pipe(gulp.dest(config.paths.tmp));
+});
+
+gulp.task('nunjucks', function() {
+  return gulp.src(helpers.src(config.paths.src, '.nunjucks'))
+    .pipe(data(function(file) {
+      return helpers.locals(file);
+    }))
+    .pipe(nunjucks())
     .pipe(gulp.dest(config.paths.tmp));
 });
 
