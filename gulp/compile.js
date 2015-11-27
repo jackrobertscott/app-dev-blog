@@ -49,7 +49,9 @@ gulp.task('markdown', function() {
     .pipe(frontMatter())
     .pipe(markdown())
     .pipe(layout(function(file) {
-      return file.frontMatter;
+      var fmData = file.frontMatter;
+      fmData.layout = helpers.absPath(fmData.layout);
+      return fmData;
     }))
     .pipe(gulp.dest(config.paths.tmp));
 });
@@ -97,7 +99,7 @@ gulp.task('images', function() {
 });
 
 gulp.task('vendor', function() {
-  return gulp.src(mainBowerFiles())
+  return gulp.src(mainBowerFiles(config.bower))
     .pipe(gulp.dest(path.join(config.paths.tmp, 'vendor')));
 });
 

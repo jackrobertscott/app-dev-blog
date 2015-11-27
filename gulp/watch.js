@@ -27,15 +27,15 @@ gulp.task('watch:html', function() {
 });
 
 gulp.task('watch:jade', function() {
-  gulp.watch(helpers.src(config.paths.src, '.jade'), gulp.series('jade', 'inject:tmp', 'reload'));
+  gulp.watch(helpers.src(config.paths.src, '.jade'), gulp.series(gulp.parallel('jade', 'markdown'), 'inject:tmp', 'reload'));
 });
 
 gulp.task('watch:nunjucks', function() {
-  gulp.watch(helpers.src(config.paths.src, '.nunjucks'), gulp.series('nunjucks', 'inject:tmp', 'reload'));
+  gulp.watch(helpers.src(config.paths.src, '.nunjucks'), gulp.series(gulp.parallel('nunjucks', 'markdown'), 'inject:tmp', 'reload'));
 });
 
 gulp.task('watch:markdown', function() {
-  gulp.watch(helpers.src(config.paths.src, ['.md', '.markdown']), gulp.series('markdown', 'reload'));
+  gulp.watch(helpers.src(config.paths.src, ['.md', '.markdown']), gulp.series('markdown', 'inject:tmp', 'reload'));
 });
 
 gulp.task('watch:js', function() {

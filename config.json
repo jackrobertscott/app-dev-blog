@@ -5,5 +5,15 @@
     "dist": "./dist"
   },
   "sourcemaps": false,
-  "cname": ""
+  "cname": "",
+  "bower": {
+    "overrides": {
+      "bootstrap": {
+        "main": [
+          "dist/css/bootstrap.css",
+          "dist/js/bootstrap.js"
+        ]
+      }
+    }
+  }
 }

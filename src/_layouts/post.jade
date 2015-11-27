@@ -1,0 +1,21 @@
+extends base.jade
+
+block title
+  title Post
+  
+block content
+  .header
+    .container
+      .row
+        .left.col-sm-6
+          h1 Jack Blog
+        .right.col-sm-4.col-sm-offset-2
+          h5 
+            a Home
+  .content  
+    .container
+      .row
+        .col-sm-12
+          h1.display-1= title
+          br
+          != contents

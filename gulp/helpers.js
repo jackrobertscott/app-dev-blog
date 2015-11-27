@@ -51,6 +51,10 @@ Helpers.prototype.locals = function locals(file) {
   });
 };
 
+Helpers.prototype.absPath = function absPath(file) {
+  return path.join(__dirname, '..', config.paths.src, file);
+};
+
 Helpers.prototype._fileData = function _fileData(file) {
   var data;
   try {
@@ -71,7 +75,7 @@ Helpers.prototype._uncached = function _uncached(_module) {
 
 Helpers.prototype._partial = function _partial(file, data) {
   var ext = path.extname(file);
-  file = path.join(__dirname, '..', config.paths.src, file);
+  file = this.absPath(file);
   data = _.assign(this._fileData(file), data || {});
   switch (ext) {
     case '.jade':
