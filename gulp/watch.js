@@ -26,6 +26,18 @@ gulp.task('watch:html', function() {
   gulp.watch(helpers.src(config.paths.src, '.html'), gulp.series('html', 'inject:tmp', 'reload'));
 });
 
+gulp.task('watch:jade', function() {
+  gulp.watch(helpers.src(config.paths.src, '.jade'), gulp.series('jade', 'inject:tmp', 'reload'));
+});
+
+gulp.task('watch:nunjucks', function() {
+  gulp.watch(helpers.src(config.paths.src, '.nunjucks'), gulp.series('nunjucks', 'inject:tmp', 'reload'));
+});
+
+gulp.task('watch:markdown', function() {
+  gulp.watch(helpers.src(config.paths.src, ['.md', '.markdown']), gulp.series('markdown', 'reload'));
+});
+
 gulp.task('watch:js', function() {
   gulp.watch(helpers.src(config.paths.src, '.js'), gulp.series('js', 'reload'));
 });

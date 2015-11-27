@@ -7,6 +7,9 @@ var sourcemaps = require('gulp-sourcemaps');
 var data = require('gulp-data');
 var jade = require('gulp-jade');
 var nunjucks = require('gulp-nunjucks-render');
+var frontMatter = require('gulp-front-matter');
+var markdown = require('gulp-markdown');
+var layout = require('gulp-layout');
 var babel = require('gulp-babel');
 var autoprefixer = require('gulp-autoprefixer');
 var less = require('gulp-less');
@@ -38,6 +41,16 @@ gulp.task('nunjucks', function() {
       return helpers.locals(file);
     }))
     .pipe(nunjucks())
+    .pipe(gulp.dest(config.paths.tmp));
+});
+
+gulp.task('markdown', function() {
+  return gulp.src(helpers.src(config.paths.src, ['.md', '.markdown']))
+    .pipe(frontMatter())
+    .pipe(markdown())
+    .pipe(layout(function(file) {
+      return file.frontMatter;
+    }))
     .pipe(gulp.dest(config.paths.tmp));
 });
 
@@ -78,7 +91,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('images', function() {
-  return gulp.src(helpers.src(config.paths.src, '.{gif,jpeg,jpg,png,svg}'))
+  return gulp.src(helpers.src(config.paths.src, ['.gif', '.jpeg', '.jpg', '.png', '.svg']))
     .pipe(imagemin())
     .pipe(gulp.dest(config.paths.tmp));
 });

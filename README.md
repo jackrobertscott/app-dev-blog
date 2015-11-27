@@ -17,9 +17,6 @@ Main configuration is kept in a file called config.json. This file should contai
 - `sourcemaps` Type `boolean|regex|function` Required: Add sourcemaps. (see: [gulp-if](https://www.npmjs.com/package/gulp-if))
 - `cname` Type `string` Optional: Add `CNAME` file when deploying with this url.
 
-## Style Guide
-You should follow the [Angular Style Guide](https://github.com/johnpapa/angular-styleguide) by John Papa.
-
 ## File Injection
 Script and style files, both custom built and installed from bower, may be injected into markup files. To do this, you must include associated comment tags into any markup file you wish to have the scripts/styles included in. Bellow is an example:
 
@@ -31,6 +28,7 @@ Script and style files, both custom built and installed from bower, may be injec
     <!-- bower:css -->
     <!-- bower installed css files will go here... -->
     <!-- endinject -->
+    
     <!-- inject:css -->
     <!-- css files will go here... -->
     <!-- endinject -->
@@ -39,6 +37,7 @@ Script and style files, both custom built and installed from bower, may be injec
     <!-- bower:js -->
     <!-- bower installed scripts will go here... -->
     <!-- endinject -->
+    
     <!-- inject:js -->
     <!-- js files will go here... -->
     <!-- endinject -->
@@ -46,21 +45,58 @@ Script and style files, both custom built and installed from bower, may be injec
 </html>
 ```
 
-## Authentication
-Authentication is controlled by firebase. You can setup your own authentication system or use one of Firebase's techniques (see [here](https://www.firebase.com/docs/web/libraries/angular/guide/user-auth.html)). To prevent an unauthenticated user from accessing a route; set data.authenticate to true, like so:
+## Partials
+Partial files may be inserted into `.jade` and `.nunjucks` files that render with given data.
 
-```js
-/** @ngInject */
-function routeConfig($stateProvider) {
-  $stateProvider
-    .state('base.rock', {
-      url: '/rock',
-      templateUrl: 'app/rock/rock.html',
-      controller: 'RockController',
-      controllerAs: 'vm',
-      data: {
-        authenticate: true,
-      },
-    });
-}
+Jade:
+```jade
+body
+  != partial('_views/header.jade', {title: 'Page Title'})
+  p Some content
+  != partial('_views/footer.jade', {title: 'Page Title'})
+```
+
+Nunjucks:
+```nunjucks
+<body>
+  {{ partial('_views/header.jade', {title: 'Page Title'}) }}
+  <p>Some content</p>
+  {{ partial('_views/footer.jade', {title: 'Page Title'}) }}
+</body>
+```
+
+## Markdown Posts
+Posts may be written in markdown and extended from other templating engines. This is done like so:
+
+example.md
+```md
+---
+title: Hello World
+layout: _layout.jade
+---
+
+Some example content!
+```
+
+_layout.jade
+```
+doctype html
+html
+  head
+   title= title
+  body
+    != contents
+```
+
+Result:
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World</title>
+  </head>
+  <body>
+    <p>Some example content!</p>
+  </body>
+</html>
 ```

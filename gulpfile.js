@@ -6,6 +6,9 @@ gulp.task('compile', gulp.series(
   'clean:tmp',
   gulp.parallel(
     'html',
+    'jade',
+    'nunjucks',
+    'markdown',
     'js',
     'css',
     'less',
@@ -17,6 +20,9 @@ gulp.task('compile', gulp.series(
 
 gulp.task('watch', gulp.parallel(
   'watch:html',
+  'watch:jade',
+  'watch:nunjucks',
+  'watch:markdown',
   'watch:js',
   'watch:css',
   'watch:less',

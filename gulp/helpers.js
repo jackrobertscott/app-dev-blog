@@ -1,9 +1,11 @@
 'use strict';
 
 var path = require('path');
+var fs = require('fs');
 var _ = require('lodash');
 var jade = require('jade');
 var nunjucks = require('nunjucks');
+var marked = require('marked');
 var config = require('../config');
 
 function Helpers() {
@@ -76,6 +78,9 @@ Helpers.prototype._partial = function _partial(file, data) {
       return jade.renderFile(file, data);
     case '.nunjucks':
       return nunjucks.render(file, data);
+    case '.md':
+    case '.markdown':
+      return marked(fs.readFileSync(file));
     default:
       throw new Error('partial with extension ' + ext + ' is not supported');
   }
