@@ -10,6 +10,8 @@ gulp.task('compile', gulp.series(
     'nunjucks',
     'markdown',
     'js',
+    'ts',
+    'coffee',
     'css',
     'less',
     'sass',
@@ -24,15 +26,11 @@ gulp.task('watch', gulp.parallel(
   'watch:nunjucks',
   'watch:markdown',
   'watch:js',
+  'watch:ts',
+  'watch:coffee',
   'watch:css',
   'watch:less',
   'watch:sass'
-));
-
-gulp.task('serve', gulp.series(
-  'compile',
-  'browser-sync:tmp',
-  'watch'
 ));
 
 gulp.task('build', gulp.series(
@@ -42,7 +40,29 @@ gulp.task('build', gulp.series(
   'inject:build'
 ));
 
+gulp.task('serve', gulp.series(
+  'compile',
+  'browser-sync:tmp',
+  'watch'
+));
+
+gulp.task('serve:nowatch', gulp.series(
+  'compile',
+  'browser-sync:tmp',
+  'watch'
+));
+
+gulp.task('serve:build', gulp.series(
+  'build',
+  'browser-sync:build'
+));
+
 gulp.task('deploy', gulp.series(
   'build',
   'upload:build'
+));
+
+gulp.task('deploy:nobuild', gulp.series(
+  'compile',
+  'upload:tmp'
 ));

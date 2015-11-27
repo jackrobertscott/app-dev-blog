@@ -42,6 +42,14 @@ gulp.task('watch:js', function() {
   gulp.watch(helpers.src(config.paths.src, '.js'), gulp.series('js', 'reload'));
 });
 
+gulp.task('watch:ts', function() {
+  gulp.watch(helpers.src(config.paths.src, '.ts'), gulp.series('ts', 'reload'));
+});
+
+gulp.task('watch:coffee', function() {
+  gulp.watch(helpers.src(config.paths.src, '.coffee'), gulp.series('coffee', 'reload'));
+});
+
 gulp.task('watch:css', function() {
   gulp.watch(helpers.src(config.paths.src, '.css'), gulp.series('css', 'reload'));
 });

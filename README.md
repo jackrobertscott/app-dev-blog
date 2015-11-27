@@ -4,8 +4,11 @@
 ## Usage
 - `npm run compile` compile website into temporary folder.
 - `npm run serve` serve and watch a compiled, uncompressed version of website.
+- `npm run serve:nowatch` serve a compiled, uncompressed version of website.
+- `npm run serve:build` serve a compiled, compressed version of website.
 - `npm run build` compile and compress website into a distribution folder.
 - `npm run deploy` deploy a compiled, compressed version of website to GitHub Pages.
+- `npm run deploy:nobuild` deploy a compiled, uncompressed version of website to GitHub Pages.
 
 ## Configuration
 Main configuration is kept in a file called config.json. This file should contain the following properties:

@@ -10,7 +10,8 @@ var nunjucks = require('gulp-nunjucks-render');
 var frontMatter = require('gulp-front-matter');
 var markdown = require('gulp-markdown');
 var layout = require('gulp-layout');
-var babel = require('gulp-babel');
+var ts = require('gulp-typescript');
+var coffee = require('gulp-coffee');
 var autoprefixer = require('gulp-autoprefixer');
 var less = require('gulp-less');
 var sass = require('gulp-sass');
@@ -58,10 +59,22 @@ gulp.task('markdown', function() {
 
 gulp.task('js', function() {
   return gulp.src(helpers.src(config.paths.src, '.js'))
+    .pipe(gulp.dest(config.paths.tmp));
+});
+
+gulp.task('ts', function() {
+  return gulp.src(helpers.src(config.paths.src, '.ts'))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
-    .pipe(babel({
-      presets: ['es2015'],
-    }))
+    .pipe(ts())
+    .js
+    .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
+    .pipe(gulp.dest(config.paths.tmp));
+});
+
+gulp.task('coffee', function() {
+  return gulp.src(helpers.src(config.paths.src, '.coffee'))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
+    .pipe(coffee())
     .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
     .pipe(gulp.dest(config.paths.tmp));
 });
