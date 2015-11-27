@@ -82,7 +82,7 @@ Some example content!
 ```
 
 _layout.jade
-```
+```jade
 doctype html
 html
   head
@@ -92,7 +92,7 @@ html
 ```
 
 Result:
-```
+```html
 <!DOCTYPE html>
 <html>
   <head>
