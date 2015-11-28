@@ -1,0 +1,32 @@
+@import './_styles/base';
+
+body {
+  background-color: $bg;
+}
+  
+.header {
+  border-bottom: 1px solid darken($bg, 10%);
+  padding: 30px 0;
+  .left {
+    h1 {
+      font-size: $h-size;
+    }
+  }
+  .right {
+    text-align: right;
+    h5 {
+      line-height: $h-size;
+    }
+  }
+}
+  
+.content {
+  padding: 50px 0;
+  p {
+    text-align: justify;
+    color: $p-color;
+    font-size: $p-size;
+    line-height: $p-height;
+    font-weight: $p-weight;
+  }
+}
