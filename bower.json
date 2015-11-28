@@ -1,5 +1,5 @@
 {
-  "name": "app-dev-blog",
+  "name": "gulp-examples",
   "ignore": [
     "**/.*",
     "node_modules",

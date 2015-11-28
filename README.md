@@ -1,5 +1,5 @@
-# app-dev-blog
-> Blog on sweet software and awesome applications
+# gulp-examples
+> Example gulp setup
 
 ## Usage
 - `npm run compile` compile website into temporary folder.
