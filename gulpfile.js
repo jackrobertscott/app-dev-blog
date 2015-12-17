@@ -16,8 +16,7 @@ gulp.task('compile', gulp.series(
     'coffee',
     'css',
     'less',
-    'sass',
-    'vendor'
+    'sass'
   ),
   'inject:tmp'
 ));

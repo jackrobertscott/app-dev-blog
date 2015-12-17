@@ -16,7 +16,6 @@ var autoprefixer = require('gulp-autoprefixer');
 var less = require('gulp-less');
 var sass = require('gulp-sass');
 var imagemin = require('gulp-imagemin');
-var mainBowerFiles = require('main-bower-files');
 var config = require('../config');
 var helpers = require('./helpers');
 
@@ -109,11 +108,6 @@ gulp.task('images', function() {
   return gulp.src(helpers.src(config.paths.src, ['.gif', '.jpeg', '.jpg', '.png', '.svg']))
     .pipe(imagemin())
     .pipe(gulp.dest(config.paths.tmp));
-});
-
-gulp.task('vendor', function() {
-  return gulp.src(mainBowerFiles(config.bower))
-    .pipe(gulp.dest(path.join(config.paths.tmp, 'vendor')));
 });
 
 gulp.task('other', function() {
