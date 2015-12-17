@@ -23,8 +23,6 @@ gulp.task('inject:tmp', function() {
     .pipe(gulp.dest(config.paths.tmp));
 });
 
-// TODO use gulp-useref so that otherfiles may be inserted
-
 gulp.task('inject:build', function() {
   var js = gulp.src(path.join(config.paths.dist, '**/*.js'), {
     read: false,
